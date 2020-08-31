@@ -35,7 +35,7 @@ class TestModels(TestCase):
             title=self.title,
             content=self.content,
             creator=self.user,
-            site_wide=False
+            enabled=False
         )
         self.assertEqual(
             announcement.get_absolute_url(),
@@ -127,7 +127,7 @@ class TestViews(TestCase):
         post_args = dict(
             title=self.title,
             content=self.content,
-            site_wide=True,
+            enabled=True,
             dismissal_type=Announcement.DISMISSAL_SESSION,
             publish_start=timezone.now(),
         )
@@ -145,7 +145,7 @@ class TestViews(TestCase):
         post_args = dict(
             title=self.title,
             content=self.content,
-            site_wide=True,
+            enabled=True,
             dismissal_type=Announcement.DISMISSAL_SESSION,
             publish_start=timezone.now(),
         )
@@ -168,7 +168,7 @@ class TestViews(TestCase):
             title=self.title,
             content=self.content,
             creator=self.staff,
-            site_wide=False
+            enabled=False
         )
         url = reverse(self.detail_urlname, kwargs=dict(pk=announcement.pk))
         request = self.factory.get(url)
@@ -186,7 +186,7 @@ class TestViews(TestCase):
             title=self.title,
             content=self.content,
             creator=self.staff,
-            site_wide=False
+            enabled=False
         )
         new_title = "Bigger Announcement"
         post_args = dict(
@@ -207,13 +207,13 @@ class TestViews(TestCase):
             title=self.title,
             content=self.content,
             creator=self.staff,
-            site_wide=False
+            enabled=False
         )
         new_title = "Bigger Announcement"
         post_args = dict(
             title=new_title,
             content=announcement.content,
-            site_wide=announcement.site_wide,
+            enabled=announcement.enabled,
             dismissal_type=announcement.dismissal_type,
             publish_start=announcement.publish_start
         )
@@ -238,7 +238,7 @@ class TestViews(TestCase):
             content=self.content,
             creator=self.staff,
             dismissal_type=Announcement.DISMISSAL_SESSION,
-            site_wide=False
+            enabled=False
         )
         with self.login(self.user):
             response = self.post(self.dismiss_urlname, pk=announcement.pk)
@@ -258,7 +258,7 @@ class TestViews(TestCase):
             content=self.content,
             creator=self.staff,
             dismissal_type=Announcement.DISMISSAL_NO,
-            site_wide=False
+            enabled=False
         )
         with self.login(self.staff):
             response = self.post(self.dismiss_urlname, pk=announcement.pk)
@@ -276,7 +276,7 @@ class TestViews(TestCase):
             content=self.content,
             creator=self.staff,
             dismissal_type=Announcement.DISMISSAL_PERMANENT,
-            site_wide=False
+            enabled=False
         )
         with self.login(self.user):
             response = self.post(self.dismiss_urlname, pk=announcement.pk)
@@ -294,7 +294,7 @@ class TestViews(TestCase):
             content=self.content,
             creator=self.staff,
             dismissal_type=Announcement.DISMISSAL_SESSION,
-            site_wide=False
+            enabled=False
         )
         with self.login(self.user):
             self.post(
@@ -318,7 +318,7 @@ class TestViews(TestCase):
             content=self.content,
             creator=self.staff,
             dismissal_type=Announcement.DISMISSAL_NO,
-            site_wide=False
+            enabled=False
         )
         with self.login(self.staff):
             response = self.post(
@@ -340,7 +340,7 @@ class TestViews(TestCase):
             content=self.content,
             creator=self.staff,
             dismissal_type=Announcement.DISMISSAL_PERMANENT,
-            site_wide=False
+            enabled=False
         )
         with self.login(self.user):
             self.post(
@@ -361,7 +361,7 @@ class TestViews(TestCase):
             title=self.title,
             content=self.content,
             creator=self.staff,
-            site_wide=False
+            enabled=False
         )
         url = reverse(self.list_urlname)
         request = self.factory.get(url)
@@ -379,7 +379,7 @@ class TestViews(TestCase):
             title=self.title,
             content=self.content,
             creator=self.staff,
-            site_wide=False
+            enabled=False
         )
         url = reverse(self.delete_urlname, kwargs=dict(pk=announcement.pk))
         request = self.factory.post(url)
@@ -395,7 +395,7 @@ class TestViews(TestCase):
             title=self.title,
             content=self.content,
             creator=self.staff,
-            site_wide=False
+            enabled=False
         )
         url = reverse(self.delete_urlname, kwargs=dict(pk=announcement.pk))
         request = self.factory.post(url)
@@ -416,14 +416,14 @@ class TestTags(TestCase):
             title="first",
             content=self.content,
             creator=self.user,
-            site_wide=True
+            enabled=True
         )
 
         self.second = Announcement.objects.create(
             title="second",
             content=self.content,
             creator=self.user,
-            site_wide=True
+            enabled=True
         )
 
     @mock.patch("django.template.Variable")

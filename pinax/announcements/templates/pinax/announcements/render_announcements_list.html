@@ -1,0 +1,49 @@
+{% load pinax_announcements_tags static sekizai_tags %}
+
+{% announcements as announcement_list %}
+
+{% if announcement_list %}
+    <div class="announcements">
+        {% for announcement in announcement_list %}
+            <div class="announcement alert
+                        {% if announcement.dismiss_url %} alert-dismissable fade in {% endif %}
+                        {% if announcement.announcement_style %}alert-{{ announcement.announcement_style }}{% endif %}">
+                {% if announcement.dismiss_url %}
+                    <a id="announcement_{{ announcement.id }}" href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                {% endif %}
+                {%if announcement.icon|lower|length %}
+                    <div class="row">
+                        <div class="col-sm-2 col-md-1" style="font-size:60px;text-align:center;">{{ announcement.icon.as_html }}</div>
+                        <div class="col-sm-9 col-md-10"><strong>{{ announcement.title }}</strong>{{ announcement.content|safe }}</div>
+                    </div>
+                {% else %}
+                    <strong style="font-size:18px;">{{ announcement.title }}</strong>{{ announcement.content|safe }}
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+{% addtoblock 'js' %}
+    {% for announcement in announcement_list %}
+        {% if announcement.dismiss_url %}
+            <script id="announcement_dismiss_{{ announcement.id }}">
+                $('#announcement_{{ announcement.id }}').on('click', function () {
+                    $.ajax({
+                        url: '{{ announcement.dismiss_url }}',
+                        type: 'POST',
+                        cache: false,
+                        async: true,
+                        data: {csrfmiddlewaretoken: '{{ csrf_token }}'},
+                        success: function (result) {
+                            console.log('Announcement dismissed');
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            console.log(textStatus + ': ' + errorThrown);
+                        }
+                    });
+                });
+            </script>
+        {% endif %}
+    {% endfor %}
+{% endaddtoblock %}

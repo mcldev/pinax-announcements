@@ -1,19 +1,33 @@
+from adminsortable2.admin import SortableAdminMixin
 from django.contrib import admin
 from django.contrib.auth import get_user_model
+from pinax.announcements.forms import AnnouncementForm
 
+from .filters import IsEnabledFilter
 from .models import Announcement, Dismissal
 
 
-class AnnouncementAdmin(admin.ModelAdmin):
-    list_display = ("title", "creator", "creation_date", "members_only")
-    list_filter = ("members_only",)
+class AnnouncementAdmin(SortableAdminMixin, admin.ModelAdmin):
+    list_display = ("title", "creator", "creation_date", "is_enabled", "members_only")
+    list_filter = (IsEnabledFilter, "members_only", )
+    form = AnnouncementForm
     fieldsets = [
         (None, {
             "fields": [
-                "title", "content", "site_wide", "members_only", "publish_start", "publish_end",
+                "title",
+                ("icon", "announcement_style"),
+                "content",
+                ("enabled", "members_only"),
+                "publish_start",
+                "publish_end",
                 "dismissal_type"],
         }),
     ]
+
+    class Media:
+        css = {
+            'all': ('pinax/announcements/admin/admin.min.css',)
+        }
 
     def save_model(self, request, obj, form, change):
         if not change:
@@ -36,3 +50,4 @@ class DismissalAdmin(admin.ModelAdmin):
 
 admin.site.register(Announcement, AnnouncementAdmin)
 admin.site.register(Dismissal, DismissalAdmin)
+

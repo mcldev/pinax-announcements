@@ -25,7 +25,7 @@ class AnnouncementsNode(template.Node):
         ).filter(
             Q(publish_end__isnull=True) | Q(publish_end__gt=timezone.now())
         ).filter(
-            site_wide=True
+            enabled=True
         )
 
         exclusions = request.session.get("excluded_announcements", [])
@@ -35,7 +35,7 @@ class AnnouncementsNode(template.Node):
                 exclusions.add(dismissal.announcement.pk)
         else:
             qs = qs.exclude(members_only=True)
-        context[self.as_var] = qs.exclude(pk__in=exclusions)
+        context[self.as_var] = qs.exclude(pk__in=exclusions).order_by('order')
         return ""
 
 
@@ -48,3 +48,9 @@ def announcements(parser, token):
     Returns a list of announcements
     """
     return AnnouncementsNode.handle_token(parser, token)
+
+
+@register.inclusion_tag('pinax/announcements/render_announcements_list.html', takes_context=True)
+def render_announcement_list(context):
+    # request = context['request']
+    return context

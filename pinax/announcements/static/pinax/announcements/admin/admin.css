@@ -1,0 +1,3 @@
+.change-list #changelist table tbody .drag.ui-sortable-handle {
+    max-width: 30px!important;
+}
