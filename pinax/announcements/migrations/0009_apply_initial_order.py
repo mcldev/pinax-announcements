@@ -8,16 +8,16 @@ def reorder(apps, schema_editor):
     announcements = AnnouncementModel.objects.all().order_by('-creation_date')
     order = 0
     for item in announcements:
-        order += 1
         item.order = order
+        order += 1
     AnnouncementModel.objects.bulk_update(announcements, ['order'])
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('announcements', '0007_auto_20200827_1929'),
+        ('announcements', '0008_auto_20200902_1024'),
     ]
 
     operations = [
-        migrations.RunPython(reorder),
+        migrations.RunPython(reorder, reverse_code=migrations.RunPython.noop),
     ]

@@ -7,7 +7,8 @@
         {% for announcement in announcement_list %}
             <div class="announcement alert
                         {% if announcement.dismiss_url %} alert-dismissable fade in {% endif %}
-                        {% if announcement.announcement_style %}alert-{{ announcement.announcement_style }}{% endif %}">
+                        {% if announcement.announcement_style %}alert-{{ announcement.announcement_style }}
+                        {% else %}panel panel-default{% endif %}">
                 {% if announcement.dismiss_url %}
                     <a id="announcement_{{ announcement.id }}" href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                 {% endif %}
