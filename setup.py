@@ -75,6 +75,7 @@ setup(
     package_data={
         "announcements": []
     },
+    include_package_data=True,
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Environment :: Web Environment",

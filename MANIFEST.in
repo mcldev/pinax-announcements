@@ -1,6 +1,6 @@
 include AUTHORS
 include LICENSE
 include README.md
-recursive-include */static *
-recursive-include */templates *
-recursive-include */boilerplates *
+recursive-include pinax/announcements/static *
+recursive-include pinax/announcements/templates *
+recursive-include pinax/announcements/boilerplates *
