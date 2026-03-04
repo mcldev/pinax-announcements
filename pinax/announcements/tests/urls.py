@@ -1,4 +1,4 @@
-from django.conf.urls import include, url
+from django.urls import include, re_path
 from django.http import HttpResponse
 
 
@@ -7,6 +7,6 @@ def dummy_view(request):
 
 
 urlpatterns = [
-    url(r"^", include("pinax.announcements.urls", namespace="pinax_announcements")),
-    url(r"^dummy_login/$", dummy_view, name="account_login"),
+    re_path(r"^", include("pinax.announcements.urls")),
+    re_path(r"^dummy_login/$", dummy_view, name="account_login"),
 ]

@@ -4,7 +4,10 @@ from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
-from fontawesome.fields import IconField
+if 'fontawesome_5' in settings.INSTALLED_APPS and False:
+    from fontawesome_5.fields import IconField
+else:
+    from fontawesome.fields import IconField
 
 
 class Announcement(models.Model):

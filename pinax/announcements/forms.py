@@ -1,6 +1,5 @@
 from ckeditor.widgets import CKEditorWidget
 from django import forms
-from fontawesome.widgets import IconWidget
 
 from .config import ANNOUNCEMENT_STYLES
 from .models import Announcement
