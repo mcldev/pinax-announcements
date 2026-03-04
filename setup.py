@@ -64,6 +64,8 @@ Supported Django and Python Versions
 +-----------------+-----+-----+-----+
 |  3.2            |  *  |  *  |  *  |
 +-----------------+-----+-----+-----+
+|  4.0            |  *  |  *  |  *  |
++-----------------+-----+-----+-----+
 """
 
 setup(
@@ -88,6 +90,7 @@ setup(
         "Framework :: Django :: 3.0",
         "Framework :: Django :: 3.1",
         "Framework :: Django :: 3.2",
+        "Framework :: Django :: 4.0",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
