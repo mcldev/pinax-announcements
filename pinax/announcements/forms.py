@@ -1,4 +1,4 @@
-from ckeditor.widgets import CKEditorWidget
+from djangocms_text_ckeditor.widgets import TextEditorWidget
 from django import forms
 
 from .config import ANNOUNCEMENT_STYLES
@@ -8,7 +8,7 @@ from .models import Announcement
 class AnnouncementForm(forms.ModelForm):
     title = forms.CharField(widget=forms.TextInput(attrs={'size': '100', }))
     announcement_style = forms.ChoiceField(required=False, choices=ANNOUNCEMENT_STYLES)
-    content = forms.CharField(widget=CKEditorWidget(), required=False)
+    content = forms.CharField(widget=TextEditorWidget(), required=False)
     enabled = forms.BooleanField(initial=True, required=False,)
     class Meta:
         model = Announcement

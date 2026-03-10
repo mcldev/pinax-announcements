@@ -1,0 +1,58 @@
+Metadata-Version: 2.4
+Name: pinax-announcements
+Version: 6.0.0
+Summary: a Django announcements app
+Home-page: http://github.com/pinax/pinax-announcements/
+Author: Pinax Team
+Author-email: team@pinaxproject.com
+License: MIT
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django
+Classifier: Framework :: Django :: 4.2
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.9
+License-File: LICENSE
+License-File: AUTHORS
+Requires-Dist: django<5.0,>=4.2
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: home-page
+Dynamic: license
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+
+.. image:: http://pinaxproject.com/pinax-design/patches/pinax-announcements.svg
+    :target: https://pypi.python.org/pypi/pinax-announcements/
+
+===================
+Pinax Announcements
+===================
+
+.. image:: https://img.shields.io/pypi/v/pinax-announcements.svg
+    :target: https://pypi.python.org/pypi/pinax-announcements/
+
+``pinax-announcements`` is a well tested, documented, and proven solution
+for any site wanting announcements for it's users.
+
+Supported Django and Python Versions
+------------------------------------
+
++-----------------+------+------+------+
+| Django / Python | 3.9  | 3.10 | 3.11 |
++=================+======+======+======+
+|  4.2            |  *   |  *   |  *   |
++-----------------+------+------+------+
